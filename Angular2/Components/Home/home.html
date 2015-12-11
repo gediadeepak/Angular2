@@ -1,0 +1,50 @@
+﻿
+<div class="container">
+
+    <div class="jumbotron">
+        <h1>Angular 2.0 sample components</h1>
+
+        <p>Current version: Angular 2.0 alpha 46</p>
+    </div>
+</div>
+<div class="container">
+    <tabs>
+        <tab [tab-title]="'TS Script'">
+<pre>
+        import {Component} from 'angular2/angular2';
+        import {RouteParams} from 'angular2/router';
+        import {ROUTER_DIRECTIVES} from 'angular2/router';
+        import {Tabs} from '../tabs/tabs';
+        import {Tab} from '../tabs/tab';
+        @Component({
+            selector: 'about',
+            directives: [ROUTER_DIRECTIVES, Tabs, Tab],
+            templateUrl: './components/home/home.html'
+        })
+        export class Home {
+    
+        } 
+</pre>
+        </tab>
+        <tab tab-title="HTML">
+            <pre>
+            &lt;div class="container"&gt;
+                &lt;div class="jumbotron"&gt;
+                    &lt;h1&gt;Angular 2.0 sample components&lt;/h1&gt;
+                    &lt;p&gt;Current version: Angular 2.0 alpha 46&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="container"&gt;
+                &lt;tabs&gt;
+                    &lt;tab [tab-title]="'TS Script'"&gt;
+                    &lt;/tab&gt;
+                    &lt;tab tab-title="HTML"&gt;
+                    &lt;/tab&gt;
+                &lt;/tabs&gt;
+            &lt;/div&gt;
+</pre>
+        </tab>
+
+        
+</tabs>
+</div>

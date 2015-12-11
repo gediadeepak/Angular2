@@ -1,0 +1,45 @@
+﻿<div class="jumbotron">
+    <h1>This is About us page</h1>
+</div>
+<tabs>
+    <tab [tab-title]="'TS Script for routing'">
+        <pre style="overflow:auto;white-space:nowrap">
+                import {Component, View, bootstrap, provide} from 'angular2/angular2';<br />
+                import {HTTP_PROVIDERS} from 'angular2/http';<br />
+                import {RouteParams, ROUTER_DIRECTIVES, RouteConfig, Location, ROUTER_BINDINGS, LocationStrategy, HashLocationStrategy, Route, AsyncRoute, Router, ComponentInstruction, CanReuse} from 'angular2/router';<br />
+                import {About} from '../about/about';<br />
+                import {ContactUs} from '../contactus/contactus';<br />
+                import {ToDoList} from '../todo-list/todoList';<br />
+                    @Component({<br />
+                    selector: 'demo-page',<br />
+                    directives: [ROUTER_DIRECTIVES, About, ContactUs,  ToDoList],<br />
+                    templateUrl: './components/demo-page/demo-page.html'<br />
+                    })<br />
+            <br />
+                    @RouteConfig([<br />
+                    new Route({ path: '/about', component: About, name: 'About' }),<br />
+                    new Route({ path: '/contactus', component: ContactUs, name: 'ContactUs' }),<br />
+                    new Route({ path: '/todo', component: ToDoList, name: 'ToDoList' }),<br />
+                    ])<br />
+            <br />
+                    export class DemoPage {<br />
+                    }<br />
+        </pre>
+    </tab>
+    <tab tab-title="HTML for routing">
+        <pre>
+        &lt;div class="container"&gt;
+        &lt;div&gt;
+        &lt;div class="list-group col-md-3"&gt;
+        &lt;a [router-link]="['/Demo/About']" class="list-group-item"&gt;About&lt;/a&gt;
+        &lt;a [router-link]="['/Demo/ContactUs']" class="list-group-item"&gt;Contactus&lt;/a&gt;
+        &lt;a [router-link]="['/Demo/ToDoList']" class="list-group-item"&gt;Binding&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div class="col-md-9"&gt;
+        &lt;router-outlet&gt;&lt;/router-outlet&gt;
+        &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;/div&gt;
+        </pre>
+    </tab>
+</tabs>

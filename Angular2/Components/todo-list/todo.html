@@ -1,0 +1,153 @@
+﻿<p>Please enter the item in the list below</p>
+<table class="table">
+    <thead>
+        <tr>
+            <td>ToDo list</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ng-for="#list of toDoList; #i = index" style="margin-bottom: 10px;">
+            <td><input type="checkbox" #comleted (change)="completedList(list,comleted.checked,i)" /></td>
+            <td>{{list.name}}</td>
+            <td><button class="btn btn-primary btn-xs" (click)="removeContact(contact)">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="row">
+    <div class="col-xs-3"><input #name placeholder="name" type="text" id="txtTodo" /></div>
+    <div class="col-xs-3"><button (click)="addContact(name.value)">Add</button></div>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Completed ToDo list</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ng-for="#list of completed; #i = index" style="margin-bottom: 10px;">
+
+            <td>{{list.name}}</td>
+
+        </tr>
+    </tbody>
+</table>
+<div>
+    <tabs >
+        <tab [tab-title]="'TS Script - ToDoList.ts'">
+            <pre style="overflow:auto;white-space:nowrap;height:60%">
+            import {Component, View, NgFor} from 'angular2/angular2';<br />
+            import {ToDo} from './todo';<br />
+            import {Tabs} from '../tabs/tabs';<br />
+            import {Tab} from '../tabs/tab';<br />
+            @Component({<br />
+                selector: 'contact-list',<br />
+            <br />
+            })<br />
+            @View({<br />
+                templateUrl: './components/todo-list/todo.html',<br />
+                directives: [NgFor, Tabs, Tab]<br />
+            })<br />
+            export class ToDoList {<br />
+                toDoList: Array<ToDo> = [];<br />
+                completed: Array<ToDo> = [];<br />
+                taskComplete: string = '';<br />
+            <br />
+                addContact(name: string) {<br />
+                    const contact = new ToDo(name);<br />
+                    this.toDoList.push(contact);<br />
+                }<br />
+                removeContact(contact) {<br />
+                    const index = this.toDoList.indexOf(contact);<br />
+                    this.toDoList.splice(index, 1);<br />
+                    for (var n = 0; n <= this.completed.length - 1; n++) {<br />
+                        if (this.completed[n].name == contact.name) {<br />
+                            this.completed.splice(n, 1);<br />
+                        }<br />
+                    }<br />
+                }<br />
+                completedList(contact, add: boolean, index: string) {<br />
+            <br />
+                    if (add) {<br />
+                        this.completed.push(contact);<br />
+                    } else {<br />
+                        for (var n = 0; n <= this.completed.length - 1; n++) {<br />
+                            if (this.completed[n].name == contact.name)<br />
+                            {<br />
+                                this.completed.splice(n, 1);<br />
+                            }<br />
+                        }<br />
+                    }<br />
+                    for (var n = 0; n <= this.completed.length - 1; n++) {<br />
+                        this.taskComplete += this.completed[n].name;<br />
+                    }<br />
+                }<br />
+            }<br />
+        </pre>
+        </tab>
+        <tab tab-title="TS Script - ToDo.ts">
+            <pre style="overflow:auto;white-space:nowrap;height:60%">
+            export class ToDo <br />
+            {<br />
+                descr = this.name;<br />
+                constructor(public name: string) <br />
+                {<br />
+                }<br />
+            }<br />
+        </pre>
+        </tab>
+        <tab tab-title="TS Script - ToDoList.html">
+            <pre style="overflow:auto;white-space:nowrap;height:60%">
+            &lt;p&gt;Please enter the item in the list below&lt;/p&gt;<br />
+            &lt;table class="table"&gt;<br />
+                &lt;thead&gt;<br />
+                    &lt;tr&gt;<br />
+                        &lt;td&gt;ToDo list&lt;/td&gt;<br />
+                    &lt;/tr&gt;<br />
+                &lt;/thead&gt;<br />
+                &lt;tbody&gt;<br />
+                    &lt;tr *ng-for="#list of toDoList; #i = index" style="margin-bottom: 10px;"&gt;<br />
+                        &lt;td&gt;&lt;input type="checkbox" #comleted (change)="completedList(list,comleted.checked,i)" /&gt;&lt;/td&gt;<br />
+                        &lt;td&gt;%7B%7Blist.name%7D%7D&lt;/td&gt;<br />
+                        &lt;td&gt;&lt;button class="btn btn-primary btn-xs" (click)="removeContact(contact)"&gt;Delete&lt;/button&gt;&lt;/td&gt;<br />
+                    &lt;/tr&gt;<br />
+                &lt;/tbody&gt;<br />
+            &lt;/table&gt;<br />
+            &lt;div class="row"&gt;<br />
+                &lt;div class="col-xs-3"&gt;&lt;input #name placeholder="name" type="text" id="txtTodo" /&gt;&lt;/div&gt;<br />
+                &lt;div class="col-xs-3"&gt;&lt;button (click)="addContact(name.value)"&gt;Add&lt;/button&gt;&lt;/div&gt;<br />
+            &lt;/div&gt;<br />
+            &lt;table class="table"&gt;<br />
+                &lt;thead&gt;<br />
+                    &lt;tr&gt;<br />
+                        &lt;td&gt;Completed ToDo list&lt;/td&gt;<br />
+                    &lt;/tr&gt;<br />
+                &lt;/thead&gt;<br />
+                &lt;tbody&gt;<br />
+                    &lt;tr *ng-for="#list of completed; #i = index" style="margin-bottom: 10px;"&gt;<br />
+                        &lt;td&gt;%7B%7Blist.name%7D%7D&lt;/td&gt;<br />
+                    &lt;/tr&gt;<br />
+                &lt;/tbody&gt;<br />
+            &lt;/table&gt;<br />
+            &lt;div class="container"&gt;<br />
+                &lt;tabs&gt;<br />
+                    &lt;tab [tab-title]="'TS Script - ToDoList.ts'"&gt;<br />
+                        &lt;pre style="overflow:auto;white-space:nowrap"&gt;<br />
+                    &lt;/pre&gt;<br />
+                    &lt;/tab&gt;<br />
+                    &lt;tab tab-title="TS Script - ToDo.ts"&gt;<br />
+                        &lt;pre style="overflow:auto;white-space:nowrap"&gt;<br />
+                    &lt;/pre&gt;<br />
+                    &lt;/tab&gt;<br />
+                    &lt;tab tab-title="TS Script - ToDo.ts"&gt;<br />
+                        &lt;pre style="overflow:auto;white-space:nowrap"&gt;<br />
+                    &lt;/pre&gt;<br />
+                    &lt;/tab&gt;<br />
+                &lt;/tabs&gt;<br />
+            &lt;/div&gt;<br />
+        </pre>
+        </tab>
+    </tabs>
+</div>
