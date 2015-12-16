@@ -23,14 +23,19 @@ var Register = (function () {
         this.fb = fb;
         this.payload = null;
         this.showLoading = false;
+        this.fname = '';
+        this.lname = '';
+        this.type = 'home';
+        this.address = '';
         this.location = locationObj;
         this.registrationService = regService;
         this.formBuilder = fb;
+        this.getRegistrationDetails();
         this.form = this.formBuilder.group({
-            "fname": ['', angular2_2.Validators.required],
-            "lname": ['', angular2_2.Validators.required],
-            "type": ['home'],
-            "address": ['', angular2_2.Validators.required]
+            "fname": [this.fname, angular2_2.Validators.required],
+            "lname": [this.lname, angular2_2.Validators.required],
+            "type": [this.type],
+            "address": [this.address, angular2_2.Validators.required]
         });
     }
     Register.prototype.gotoConfirm = function () {
@@ -47,6 +52,23 @@ var Register = (function () {
                 self.router.navigateByUrl('/Register/Confirm');
             }
         });
+    };
+    Register.prototype.getRegistrationDetails = function () {
+        var _this = this;
+        var self = this;
+        self.showLoading = true;
+        this.registrationService.getRegistrationDetails().map(function (res) { return res.json(); }).subscribe(function (res) { return _this.mapResult(res); });
+    };
+    Register.prototype.mapResult = function (data) {
+        this.regdata = data.registrationDetails;
+        console.log(this.regdata);
+        if (this.regdata != null) {
+            this.fname = this.regdata.FirstName;
+            this.lname = this.regdata.LastName;
+            this.type = this.regdata.Type;
+            this.address = this.regdata.Address;
+        }
+        this.showLoading = false;
     };
     Register = __decorate([
         angular2_1.Component({

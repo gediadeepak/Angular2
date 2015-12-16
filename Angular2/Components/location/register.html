@@ -12,7 +12,7 @@
                     Enter your First Name :
                 </div>
                 <div class="col-xs-8">
-                    <input id="fname" type="text" ng-control="fname" />
+                    <input id="fname" type="text" [ng-model]="fname" ng-control="fname" />
                     <img src="/angular2/Components/location/redwarning.png" style="width:20px" *ng-if="f.form.controls.fname.touched && !f.form.controls.fname.valid" alt="Please enter first name"/>
                     
                 </div>
@@ -25,7 +25,7 @@
                     Enter your Last Name :
                 </div>
                 <div class="col-xs-8">
-                    <input type="text"id="lname" ng-control="lname"  />
+                    <input type="text"id="lname" [ng-model]="lname" ng-control="lname"  />
                     <img src="/angular2/Components/location/redwarning.png" style="width:20px" *ng-if="f.form.controls.lname.touched && !f.form.controls.lname.valid" alt="Please enter Last name" />
                 </div>
             </div>
@@ -37,7 +37,7 @@
                     Address type :
                 </div>
                 <div class="col-xs-8">
-                    <select id="type" ng-control="type">
+                    <select id="type" [ng-model]="type"  ng-control="type">
                         <option [value]="'home'">Home Address</option>
                         <option [value]="'billing'">Billing Address</option>
                     </select>
@@ -51,7 +51,7 @@
                     Enter your Address
                 </div>
                 <div class="col-xs-8">
-                    <input type="text" id="address" ng-control="address"  />
+                    <input type="text" [ng-model]="address" id="address" ng-control="address"  />
                     <img src="/angular2/Components/location/redwarning.png" style="width:20px" *ng-if="f.form.controls.address.touched && !f.form.controls.address.valid" alt="Please enter your Address" />
                 </div>
             </div>

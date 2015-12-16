@@ -23,8 +23,14 @@ export class Register {
     showLoading: boolean = false;
     formBuilder: FormBuilder;
     result: any;
-    
+    regdata: any;
     registrationService: RegisterService;
+    fname: string = '';
+    lname: string = '';
+    type: string = 'home';
+    address: string = '';
+
+
     constructor( @Inject(Location) private locationObj: Location,
         @Inject(Router) private router: Router,
         @Inject(RegisterService) private regService: RegisterService,
@@ -32,13 +38,16 @@ export class Register {
         this.location = locationObj;
         this.registrationService = regService;
         this.formBuilder = fb;
-        
+        this.getRegistrationDetails();
+
+       
         this.form = this.formBuilder.group({
-            "fname": ['', Validators.required],
-            "lname": ['', Validators.required],            
-            "type": ['home'],
-            "address": ['', Validators.required]
+            "fname": [this.fname, Validators.required],
+            "lname": [this.lname, Validators.required],
+            "type": [this.type],
+            "address": [this.address, Validators.required]
         });
+        
     }
 
     gotoConfirm() {
@@ -56,5 +65,23 @@ export class Register {
             }
         });
         
+    }
+
+    getRegistrationDetails() {
+        let self = this;
+        self.showLoading = true;
+        this.registrationService.getRegistrationDetails().map((res: Response) => res.json()).subscribe(res=> this.mapResult(res));
+    }
+    mapResult(data) {
+        this.regdata = data.registrationDetails;
+        console.log(this.regdata);
+        if (this.regdata != null) {
+            this.fname = this.regdata.FirstName;
+            this.lname = this.regdata.LastName;
+            this.type = this.regdata.Type;
+            this.address = this.regdata.Address;
+        }
+        this.showLoading = false;
+
     }
 }
