@@ -9,6 +9,7 @@ import {Confirm} from './components/location/confirm'
 import {ThankYou} from './components/location/thankyou'
 import {TabControl} from './components/tabs/tabControl'
 import { Inject} from 'angular2/core';
+import {DynamicLoading} from './components/lazyLoading/dynamicLoading';
 
 declare var System: any;
 
@@ -26,7 +27,8 @@ declare var System: any;
         new Route({ path: '/Register/..', component: Register, name: 'Register' }),
         new Route({ path: '/Register/Confirm', component: Confirm, name: 'Confirm' }),
         new Route({ path: '/Register/ThankYou', component: ThankYou, name: 'ThankYou' }),
-        new Route({ path: '/Tab', component: TabControl, name: 'Tab' })
+        new Route({ path: '/Tab', component: TabControl, name: 'Tab' }),
+        new Route({ path: '/DynamicLoad', component: DynamicLoading, name: 'DynamicLoad' })
         
 ])
 

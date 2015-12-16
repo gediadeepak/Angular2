@@ -20,6 +20,7 @@ var confirm_1 = require('./components/location/confirm');
 var thankyou_1 = require('./components/location/thankyou');
 var tabControl_1 = require('./components/tabs/tabControl');
 var core_1 = require('angular2/core');
+var dynamicLoading_1 = require('./components/lazyLoading/dynamicLoading');
 var MyDemoApp = (function () {
     function MyDemoApp(locationObj, routerObj) {
         this.locationObj = locationObj;
@@ -51,7 +52,8 @@ var MyDemoApp = (function () {
             new router_1.Route({ path: '/Register/..', component: register_1.Register, name: 'Register' }),
             new router_1.Route({ path: '/Register/Confirm', component: confirm_1.Confirm, name: 'Confirm' }),
             new router_1.Route({ path: '/Register/ThankYou', component: thankyou_1.ThankYou, name: 'ThankYou' }),
-            new router_1.Route({ path: '/Tab', component: tabControl_1.TabControl, name: 'Tab' })
+            new router_1.Route({ path: '/Tab', component: tabControl_1.TabControl, name: 'Tab' }),
+            new router_1.Route({ path: '/DynamicLoad', component: dynamicLoading_1.DynamicLoading, name: 'DynamicLoad' })
         ]),
         __param(0, core_1.Inject(router_1.Location)),
         __param(1, core_1.Inject(router_1.Router))
